@@ -135,6 +135,13 @@ static void op_TO_ENV_DEC_M_get(const void *data, scene_state_t *ss,
 static void op_TO_ENV_TRIG_get(const void *data, scene_state_t *ss,
                                exec_state_t *es, command_state_t *cs);
 
+static void op_TO_CV_INIT_get(const void *data, scene_state_t *ss,
+                              exec_state_t *es, command_state_t *cs);
+static void op_TO_TR_INIT_get(const void *data, scene_state_t *ss,
+                              exec_state_t *es, command_state_t *cs);
+static void op_TO_INIT_get(const void *data, scene_state_t *ss,
+                           exec_state_t *es, command_state_t *cs);
+
 // TXi Methods
 static void op_TI_PARAM_get(const void *data, scene_state_t *ss,
                             exec_state_t *es, command_state_t *cs);
@@ -166,6 +173,13 @@ static void op_TI_STORE_get(const void *data, scene_state_t *ss,
                             exec_state_t *es, command_state_t *cs);
 static void op_TI_RESET_get(const void *data, scene_state_t *ss,
                             exec_state_t *es, command_state_t *cs);
+
+static void op_TI_PARAM_INIT_get(const void *data, scene_state_t *ss,
+                                 exec_state_t *es, command_state_t *cs);
+static void op_TI_IN_INIT_get(const void *data, scene_state_t *ss,
+                              exec_state_t *es, command_state_t *cs);
+static void op_TI_INIT_get(const void *data, scene_state_t *ss,
+                           exec_state_t *es, command_state_t *cs);
 
 // clang-format off
 
@@ -237,6 +251,14 @@ const tele_op_t op_TO_ENV_DEC_S       = MAKE_GET_OP(TO.ENV.DEC.S        , op_TO_
 const tele_op_t op_TO_ENV_DEC_M       = MAKE_GET_OP(TO.ENV.DEC.M        , op_TO_ENV_DEC_M_get       , 2, false);
 const tele_op_t op_TO_ENV_TRIG        = MAKE_GET_OP(TO.ENV.TRIG         , op_TO_ENV_TRIG_get        , 1, false);
 
+const tele_op_t op_TO_CV_INIT         = MAKE_GET_OP(TO.CV.INIT          , op_TO_CV_INIT_get         , 1, false);
+const tele_op_t op_TO_TR_INIT         = MAKE_GET_OP(TO.TR.INIT          , op_TO_TR_INIT_get         , 1, false);
+const tele_op_t op_TO_INIT            = MAKE_GET_OP(TO.INIT             , op_TO_INIT_get            , 1, false);
+
+// TXo Ailiases
+const tele_op_t op_TO_TR_P            = MAKE_ALIAS_OP(TO.TR.P           , op_TO_TR_PULSE_get        , NULL, 1, false);
+const tele_op_t op_TO_TR_P_DIV        = MAKE_ALIAS_OP(TO.TR.P.DIV       , op_TO_TR_PULSE_DIV_get    , NULL, 2, false);
+
 // TXi Operators
 const tele_op_t op_TI_PARAM           = MAKE_GET_OP(TI.PARAM            , op_TI_PARAM_get           , 1, true);
 const tele_op_t op_TI_PARAM_QT        = MAKE_GET_OP(TI.PARAM.QT         , op_TI_PARAM_QT_get        , 1, true);
@@ -255,6 +277,17 @@ const tele_op_t op_TI_IN_CALIB        = MAKE_GET_OP(TI.IN.CALIB         , op_TI_
 const tele_op_t op_TI_STORE           = MAKE_GET_OP(TI.STORE            , op_TI_STORE_get           , 1, false);
 const tele_op_t op_TI_RESET           = MAKE_GET_OP(TI.RESET            , op_TI_RESET_get           , 1, false);
 
+const tele_op_t op_TI_PARAM_INIT      = MAKE_GET_OP(TI.PARAM.INIT       , op_TI_PARAM_INIT_get      , 1, false);
+const tele_op_t op_TI_IN_INIT         = MAKE_GET_OP(TI.IN.INIT          , op_TI_IN_INIT_get         , 1, false);
+const tele_op_t op_TI_INIT            = MAKE_GET_OP(TI.INIT             , op_TI_INIT_get            , 1, false);
+
+// TXi Aliases
+const tele_op_t op_TI_PRM             = MAKE_ALIAS_OP(TI.PRM            , op_TI_PARAM_get           , NULL, 1, true);
+const tele_op_t op_TI_PRM_QT          = MAKE_ALIAS_OP(TI.PRM.QT         , op_TI_PARAM_QT_get        , NULL, 1, true);
+const tele_op_t op_TI_PRM_N           = MAKE_ALIAS_OP(TI.PRM.N          , op_TI_PARAM_N_get         , NULL, 1, true);
+const tele_op_t op_TI_PRM_SCALE       = MAKE_ALIAS_OP(TI.PRM.SCALE      , op_TI_PARAM_SCALE_get     , NULL, 2, false);
+const tele_op_t op_TI_PRM_MAP         = MAKE_ALIAS_OP(TI.PRM.MAP        , op_TI_PARAM_MAP_get       , NULL, 3, false);
+const tele_op_t op_TI_PRM_INIT        = MAKE_ALIAS_OP(TI.PRM.INIT       , op_TI_PARAM_INIT_get      , NULL, 1, false);
 
 // clang-format on
 
@@ -307,6 +340,42 @@ void TXReceive(uint8_t model, command_state_t *cs, uint8_t mode, bool shift) {
     tele_ii_rx(address, buffer, 2);
     int16_t value = (buffer[0] << 8) + buffer[1];
     cs_push(cs, value);
+}
+// Temporary Init Functions (will refactor to the TELEX soon)
+void TRInit(uint8_t output) {
+    TXSend(TO, TO_TR_POL, output, 1, true);
+    TXSend(TO, TO_TR, output, 0, true);
+    TXSend(TO, TO_TR_TIME, output, 100, true);
+    TXSend(TO, TO_TR_PULSE_DIV, output, 1, true);
+    TXSend(TO, TO_TR_M_ACT, output, 0, true);
+    TXSend(TO, TO_TR_M, output, 1000, true);
+}
+void CVInit(uint8_t output) {
+    TXSend(TO, TO_CV_SET, output, 0, true);
+    TXSend(TO, TO_CV_OFF, output, 0, true);
+    TXSend(TO, TO_CV_SLEW, output, 0, true);
+    TXSend(TO, TO_CV_SCALE, output, 0, true);
+
+    TXSend(TO, TO_OSC_FQ_SET, output, 0, true);
+    TXSend(TO, TO_OSC_SCALE, output, 0, true);
+    TXSend(TO, TO_OSC_WAVE, output, 0, true);
+    TXSend(TO, TO_OSC_PHASE, output, 0, true);
+    TXSend(TO, TO_OSC_RECT, output, 0, true);
+    TXSend(TO, TO_OSC_SLEW, output, 0, true);
+
+    TXSend(TO, TO_ENV_ACT, output, 0, true);
+    TXSend(TO, TO_ENV_ATT, output, 12, true);
+    TXSend(TO, TO_ENV_DEC, output, 250, true);
+}
+void INInit(uint8_t input) {
+    TXSend(TI, TI_IN_SCALE, input, 0, true);
+    TXSend(TI, TI_IN_TOP, input, 16383, true);
+    TXSend(TI, TI_IN_BOT, input, -16384, true);
+}
+void PRMInit(uint8_t input) {
+    TXSend(TI, TI_PARAM_SCALE, input, 0, true);
+    TXSend(TI, TI_PARAM_TOP, input, 16383, true);
+    TXSend(TI, TI_PARAM_BOT, input, 0, true);
 }
 
 // TELEX get and set methods
@@ -583,6 +652,24 @@ static void op_TO_ENV_TRIG_get(const void *NOTUSED(data), scene_state_t *ss,
                                exec_state_t *NOTUSED(es), command_state_t *cs) {
     TXCmd(TO, TO_ENV_TRIG, cs_pop(cs));
 }
+static void op_TO_CV_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                              exec_state_t *NOTUSED(es), command_state_t *cs) {
+    CVInit(cs_pop(cs));
+}
+static void op_TO_TR_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                              exec_state_t *NOTUSED(es), command_state_t *cs) {
+    TRInit(cs_pop(cs));
+}
+static void op_TO_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                           exec_state_t *NOTUSED(es), command_state_t *cs) {
+    uint8_t end = cs_pop(cs) * 4;
+    uint8_t start = end - 3;
+    uint8_t i;
+    for (i = start; i <= end; i++) {
+        CVInit(i);
+        TRInit(i);
+    }
+}
 
 // TXi
 static void op_TI_PARAM_get(const void *NOTUSED(data), scene_state_t *ss,
@@ -651,4 +738,23 @@ static void op_TI_STORE_get(const void *NOTUSED(data), scene_state_t *ss,
 static void op_TI_RESET_get(const void *NOTUSED(data), scene_state_t *ss,
                             exec_state_t *NOTUSED(es), command_state_t *cs) {
     TXCmd(TI, TI_RESET, cs_pop(cs));
+}
+static void op_TI_PARAM_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                                 exec_state_t *NOTUSED(es),
+                                 command_state_t *cs) {
+    PRMInit(cs_pop(cs));
+}
+static void op_TI_IN_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                              exec_state_t *NOTUSED(es), command_state_t *cs) {
+    INInit(cs_pop(cs));
+}
+static void op_TI_INIT_get(const void *NOTUSED(data), scene_state_t *ss,
+                           exec_state_t *NOTUSED(es), command_state_t *cs) {
+    uint8_t end = cs_pop(cs) * 4;
+    uint8_t start = end - 3;
+    uint8_t i;
+    for (i = start; i <= end; i++) {
+        PRMInit(i);
+        INInit(i);
+    }
 }

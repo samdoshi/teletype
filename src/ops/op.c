@@ -116,6 +116,10 @@ const tele_op_t *tele_ops[E_OP__LENGTH] = {
     &op_TO_CV_SET, &op_TO_CV_OFF, &op_TO_CV_QT, &op_TO_CV_QT_SET, &op_TO_CV_N,
     &op_TO_CV_N_SET, &op_TO_CV_SCALE,
 
+    &op_TO_CV_INIT, &op_TO_TR_INIT, &op_TO_INIT,
+
+    &op_TO_TR_P, &op_TO_TR_P_DIV,
+
     &op_TO_OSC, &op_TO_OSC_SET, &op_TO_OSC_QT, &op_TO_OSC_QT_SET, &op_TO_OSC_FQ,
     &op_TO_OSC_FQ_SET, &op_TO_OSC_N, &op_TO_OSC_N_SET, &op_TO_OSC_LFO,
     &op_TO_OSC_LFO_SET, &op_TO_OSC_WAVE, &op_TO_OSC_SYNC, &op_TO_OSC_PHASE,
@@ -130,7 +134,12 @@ const tele_op_t *tele_ops[E_OP__LENGTH] = {
     &op_TI_PARAM, &op_TI_PARAM_QT, &op_TI_PARAM_N, &op_TI_PARAM_SCALE,
     &op_TI_PARAM_MAP, &op_TI_IN, &op_TI_IN_QT, &op_TI_IN_N, &op_TI_IN_SCALE,
     &op_TI_IN_MAP, &op_TI_PARAM_CALIB, &op_TI_IN_CALIB, &op_TI_STORE,
-    &op_TI_RESET
+    &op_TI_RESET,
+
+    &op_TI_PARAM_INIT, &op_TI_IN_INIT, &op_TI_INIT,
+
+    &op_TI_PRM, &op_TI_PRM_QT, &op_TI_PRM_N, &op_TI_PRM_SCALE, &op_TI_PRM_MAP,
+    &op_TI_PRM_INIT
 };
 
 /////////////////////////////////////////////////////////////////

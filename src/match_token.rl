@@ -303,6 +303,13 @@
         "TO.CV.N.SET"      => { MATCH_OP(E_OP_TO_CV_N_SET); };
         "TO.CV.SCALE"      => { MATCH_OP(E_OP_TO_CV_SCALE); };
 
+        "TO.CV.INIT"       => { MATCH_OP(E_OP_TO_CV_INIT); };
+        "TO.TR.INIT"       => { MATCH_OP(E_OP_TO_TR_INIT); };
+        "TO.INIT"          => { MATCH_OP(E_OP_TO_INIT); };
+
+        "TO.TR.P"          => { MATCH_OP(E_OP_TO_TR_P); };
+        "TO.TR.P.DIV"      => { MATCH_OP(E_OP_TO_TR_P_DIV); };        
+
         "TO.OSC"           => { MATCH_OP(E_OP_TO_OSC); };
         "TO.OSC.SET"       => { MATCH_OP(E_OP_TO_OSC_SET); };
         "TO.OSC.QT"        => { MATCH_OP(E_OP_TO_OSC_QT); };
@@ -352,6 +359,17 @@
         "TI.IN.CALIB"      => { MATCH_OP(E_OP_TI_IN_CALIB); };
         "TI.STORE"         => { MATCH_OP(E_OP_TI_STORE); };
         "TI.RESET"         => { MATCH_OP(E_OP_TI_RESET); };
+
+        "TI.PARAM.INIT"    => { MATCH_OP(E_OP_TI_PARAM_INIT); };
+        "TI.IN.INIT"       => { MATCH_OP(E_OP_TI_IN_INIT); };
+        "TI.INIT"          => { MATCH_OP(E_OP_TI_INIT); };
+
+        "TI.PRM"           => { MATCH_OP(E_OP_TI_PRM); };
+        "TI.PRM.QT"        => { MATCH_OP(E_OP_TI_PRM_QT); };
+        "TI.PRM.N"         => { MATCH_OP(E_OP_TI_PRM_N); };
+        "TI.PRM.SCALE"     => { MATCH_OP(E_OP_TI_PRM_SCALE); };
+        "TI.PRM.MAP"       => { MATCH_OP(E_OP_TI_PRM_MAP); };
+        "TI.PRM.INIT"      => { MATCH_OP(E_OP_TI_PRM_INIT); };
 
         # MODS
         # controlflow

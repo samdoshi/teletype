@@ -73,6 +73,14 @@ extern const tele_op_t op_TO_ENV_DEC_S;
 extern const tele_op_t op_TO_ENV_DEC_M;
 extern const tele_op_t op_TO_ENV_TRIG;
 
+extern const tele_op_t op_TO_CV_INIT;
+extern const tele_op_t op_TO_TR_INIT;
+extern const tele_op_t op_TO_INIT;
+
+extern const tele_op_t op_TO_TR_P;
+extern const tele_op_t op_TO_TR_P_DIV;
+
+
 // TXi Operators
 extern const tele_op_t op_TI_PARAM;
 extern const tele_op_t op_TI_PARAM_QT;
@@ -91,12 +99,28 @@ extern const tele_op_t op_TI_IN_CALIB;
 extern const tele_op_t op_TI_STORE;
 extern const tele_op_t op_TI_RESET;
 
+extern const tele_op_t op_TI_PARAM_INIT;
+extern const tele_op_t op_TI_IN_INIT;
+extern const tele_op_t op_TI_INIT;
+
+extern const tele_op_t op_TI_PRM;
+extern const tele_op_t op_TI_PRM_QT;
+extern const tele_op_t op_TI_PRM_N;
+extern const tele_op_t op_TI_PRM_SCALE;
+extern const tele_op_t op_TI_PRM_MAP;
+extern const tele_op_t op_TI_PRM_INIT;
+
 // helpers
 void TXSend(uint8_t model, uint8_t command, uint8_t output, int16_t value,
             bool set);
 void TXCmd(uint8_t model, uint8_t command, uint8_t output);
 void TXSet(uint8_t model, uint8_t command, command_state_t *cs);
 void TXReceive(uint8_t model, command_state_t *cs, uint8_t mode, bool shift);
+// temporary init functions
+void TRInit(uint8_t output);
+void CVInit(uint8_t output);
+void INInit(uint8_t input);
+void PRMInit(uint8_t input);
 
 // constants
 

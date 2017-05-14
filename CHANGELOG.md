@@ -16,6 +16,8 @@
 - **FIX**: divide by zero errors now explicitly return a 0 (e.g. `DIV 5 0` now returns 0 instead of -1), previously the behaviour was undefined and would crash the simulator
 - **FIX**: numerous crashing bugs with text entry
 - **FIX**: `i2c` bus crashes under high `M` times with external triggers
+- **NEW**: TELEX Aliases: `TO.TR.P` for `TO.TR.PULSE` (plus all sub-commands) and `TI.PRM` for `TI.PARAM` (plus all sub-commands)
+- **NEW**: TELEX initialization commands: `TO.TR.INIT n`, `TO.CV.INIT n`, `TO.INIT x`, `TI.PARAM.INIT n`, `TI.IN.INIT n`, and `TI.INIT x`
 
 ## v1.41
 - **NEW**: added Ansible remote commands `LV.CV` and `CY.CV`

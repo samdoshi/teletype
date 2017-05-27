@@ -435,14 +435,13 @@ static void op_V_get(const void *NOTUSED(data), scene_state_t *NOTUSED(ss),
 
 static void op_VV_get(const void *NOTUSED(data), scene_state_t *NOTUSED(ss),
                       exec_state_t *NOTUSED(es), command_state_t *cs) {
-    uint8_t negative = 1;
+    int16_t negative = 1;
     int16_t a = cs_pop(cs);
     if (a < 0) {
         negative = -1;
         a = -a;
     }
     if (a > 1000) a = 1000;
-
     cs_push(cs, negative * (table_v[a / 100] + table_vv[a % 100]));
 }
 

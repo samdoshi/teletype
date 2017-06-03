@@ -1,0 +1,14 @@
+["DEL"]
+prototype = "DEL x: ..."
+short = "Delay command by `x` ms"
+description = """
+Delay the command following the colon by `x` ms by placing it into a buffer. 
+The buffer can hold up to 8 commands. If the buffer is full, additional commands
+will be discarded.
+"""
+["DEL.CLR"]
+prototype = "DEL.CLR"
+short = "Clear the delay buffer"
+description = """
+Clear the delay buffer, cancelling the pending commands.
+"""

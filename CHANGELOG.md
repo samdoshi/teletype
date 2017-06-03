@@ -22,6 +22,7 @@
 - **FIX**: divide by zero errors now explicitly return a 0 (e.g. `DIV 5 0` now returns 0 instead of -1), previously the behaviour was undefined and would crash the simulator
 - **FIX**: numerous crashing bugs with text entry
 - **FIX**: `i2c` bus crashes under high `M` times with external triggers
+- **FIX**: `P.I` and `PN.I` no longer set values longer than allowed
 
 ## v1.4.1
 - **NEW**: added Ansible remote commands `LV.CV` and `CY.CV`

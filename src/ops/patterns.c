@@ -295,10 +295,10 @@ static void p_i_set(scene_state_t *ss, int16_t pn, int16_t i) {
     pn = normalise_pn(pn);
     i = normalise_idx(ss, pn, i);
     int16_t len = ss_get_pattern_len(ss, pn);
-    if (i < 0)
+    if (i < 0 || len == 0)
         ss_set_pattern_idx(ss, pn, 0);
-    else if (i > len)
-        ss_set_pattern_idx(ss, pn, len);
+    else if (i >= len)
+        ss_set_pattern_idx(ss, pn, len - 1);
     else
         ss_set_pattern_idx(ss, pn, i);
 }

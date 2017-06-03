@@ -1,0 +1,108 @@
+["CV"]
+prototype = "CV x"
+prototype_set = "CV x y"
+short = "CV target value"
+description = """
+Get the value of CV associated with output `x`, or set the CV output of `x` to 
+`y`.
+"""
+
+["CV.OFF"]
+prototype = "CV.OFF x"
+prototype_set = "CV.OFF x y"
+short = "CV offset added to output"
+description = """
+Get the value of the offset added to the CV value at output `x`. The offset is
+added at the final stage. Set the value of the offset added to the CV value at 
+output `x` to `y`.
+"""
+
+["CV.SET"]
+prototype = "CV.SET x"
+short = "Set CV value"
+description = """
+Set the CV value at output `x` bypassing any slew settings.
+"""
+
+["CV.SLEW"]
+prototype = "CV.SLEW x"
+prototype_set = "CV.SLEW x y"
+short = "Get/set the CV slew time in ms"
+description = """
+Get the slew time in ms associated with CV output `x`. Set the slew time 
+associated with CV output `x` to `y` ms.
+"""
+
+["IN"]
+prototype = "IN"
+short = "Get the value of IN jack (0-16383)"
+description = """
+Get the value of the IN jack. This returns a valuue in the range 0-16383.
+"""
+
+["PARAM"]
+prototype = "PARAM"
+aliases = ["PRM"]
+short = "Get the value of PARAM knob (0-16383)"
+description = """
+Get the value of the PARAM knob. This returns a valuue in the range 0-16383.
+"""
+
+["TR"]
+prototype = "TR"
+prototype_set = "TR"
+short = "Set trigger output x to y (0-1)"
+description = """
+Get the current state of trigger output `x`. Set the state of trigger 
+output `x` to `y` (0-1).
+"""
+
+["TR.POL"]
+prototype = "TR.POL x"
+prototype_set = "TR.POL x y"
+short = "Set polarity of trigger output x to y (0-1)"
+description = """
+Get the current polarity of trigger output `x`. Set the polarity of trigger 
+output `x` to `y` (0-1). When TR.POL = 1, the pulse is 0 to 1 then back to 0.
+When TR.POL = 0, the inverse is true, 1 to 0 to 1.
+"""
+
+["TR.TIME"]
+prototype = "TR.TIME x"
+prototype_set = "TR.TIME x y"
+short = "Set the pulse time of trigger x to y ms"
+description = """
+Get the pulse time of trigger output `x`. Set the pulse time of trigger
+output `x` to `y`ms.
+"""
+
+["TR.TOG"]
+prototype = "TR.TOG x"
+short = "Flip the state of trigger output x"
+description = """
+Flip the state of trigger output `x`.
+"""
+
+["TR.PULSE"]
+prototype = "TR.PULSE x"
+aliases = ["TR.P"]
+short = "Pulse trigger output x"
+description = """
+Pulse trigger output x.
+"""
+
+["MUTE"]
+prototype = "MUTE x"
+prototype_set = "MUTE x y"
+short = "Disable trigger input x"
+description = """
+Mute the trigger input on `x` (0-7) when `y` is non-zero.
+"""
+
+["STATE"]
+prototype = "STATE x"
+short = "Read the current state of input x"
+description = """
+Read the current state of trigger input `x` (0=low, 1=high). 
+"""
+

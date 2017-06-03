@@ -1,0 +1,24 @@
+["Q"]
+prototype = "Q"
+prototype_set = "Q x"
+short = "Modify the queue entries"
+description = """
+Gets the output value from the queue, or places `x` into the queue.
+"""
+
+["Q.N"]
+prototype = "Q.N"
+prototype_set = "Q.N x"
+short = "The queue length"
+description = """
+Gets/sets the length of the queue.
+"""
+
+["Q.AVG"]
+prototype = "Q.AVG"
+prototype_set = "Q.AVG x"
+short = "Return the average of the queue"
+description = """
+Getting the value the average of the values in the queue. Setting `x` sets the
+value of each entry in the queue to `x`.
+"""

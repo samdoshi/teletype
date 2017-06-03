@@ -14,7 +14,7 @@ aliases = ["TI.PRM.N"]
 short = "return the quantized note number for `PARAM` knob `x` using the scale set by `TI.PARAM.SCALE`"
 
 ["TI.PARAM.SCALE"]
-prototype_set = "TI.PARAM.SCALE x"
+prototype = "TI.PARAM.SCALE x"
 aliases = ["TI.PRM.SCALE"]
 short = "select scale # `y` for `PARAM` knob `x`; scales listed in full description"
 description = """
@@ -39,7 +39,7 @@ description = """
 """
 
 ["TI.PARAM.MAP"]
-prototype_set = "TI.PARAM.MAP x y z"
+prototype = "TI.PARAM.MAP x y z"
 aliases = ["TI.PRM.MAP"]
 short = "maps the PARAM values for input `x` across the range y - z (defaults 0-16383)"
 description = """
@@ -67,7 +67,7 @@ prototype = "TI.IN.N x"
 short = "return the quantized note number for `IN` jack `x` using the scale set by `TI.IN.SCALE`"
 
 ["TI.IN.SCALE"]
-prototype_set = "TI.IN.SCALE x"
+prototype = "TI.IN.SCALE x"
 short = "select scale # `y` for `IN` jack `x`; scales listed in full description"
 description = """
 ### Quantization Scales
@@ -91,24 +91,24 @@ description = """
 """
 
 ["TI.IN.MAP"]
-prototype_set = "TI.IN.MAP x y z"
+prototype = "TI.IN.MAP x y z"
 short = "maps the IN values for input jack `x` across the range y - z (default range is -16384 to 16383 - representing -10V to +10V)"
 
 ["TI.PARAM.INIT"]
-prototype_set = "TI.PARAM.INIT x"
+prototype = "TI.PARAM.INIT x"
 aliases = ["TI.PRM.INIT"]
 short = "initializes `PARAM` knob `x` back to the default boot settings and behaviors; neutralizes mapping (but not calibration)"
 
 ["TI.IN.INIT"]
-prototype_set = "TI.IN.INIT x"
+prototype = "TI.IN.INIT x"
 short = "initializes `IN` jack `x` back to the default boot settings and behaviors; neutralizes mapping (but not calibration)"
 
 ["TI.INIT"]
-prototype_set = "TI.INIT d"
+prototype = "TI.INIT d"
 short = "initializes all of the `PARAM` and `IN` inputs for device number `d` (1-8)"
 
 ["TI.PARAM.CALIB"]
-prototype_set = "TI.PARAM.CALIB x y"
+prototype = "TI.PARAM.CALIB x y"
 aliases = ["TI.PRM.CALIB"]
 short = "calibrates the scaling for PARAM knob `x`; `y` of `0` sets the bottom bound; `y` of `1` sets the top bound"
 description = """
@@ -123,7 +123,7 @@ Don't forget to call the `TI.STORE` command to save your calibration between ses
 """
 
 ["TI.IN.CALIB"]
-prototype_set = "TI.IN.CALIB x y"
+prototype = "TI.IN.CALIB x y"
 short = "calibrates the scaling for IN jack `x`; `y` of `-1` sets the `-10V` point; `y` of `0` sets the `0V` point; `y` of `1` sets the `+10V` point"
 description = """
 You can calibrate your `IN` jack to external voltages by using this command. The steps for full calibration are as follows:
@@ -139,9 +139,9 @@ Don't forget to call the `TI.STORE` command to save your calibration between ses
 """
 
 ["TI.STORE"]
-prototype_set = "TI.STORE d"
+prototype = "TI.STORE d"
 short = "stores the calibration data for TXi number `d` (1-8) to its internal flash memory"
 
 ["TI.RESET"]
-prototype_set = "TI.RESET d"
+prototype = "TI.RESET d"
 short = "resets the calibration data for TXi number `d` (1-8) to its factory defaults (no calibration)"

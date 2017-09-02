@@ -276,6 +276,11 @@ void tele_tick(scene_state_t *ss, uint8_t time) {
         if (ss->delay.time[i]) {
             ss->delay.time[i] -= time;
             if (ss->delay.time[i] <= 0) {
+                // Workaround for issue #80. (0 is the signifier for "empty")
+                // Setting delay.time[i] to 1 prevents delayed delay commands
+                //     from seeing a perfectly-timed delay slot as empty
+                //     while it's still being processed. 
+                ss->delay.time[i] = 1;
                 run_command(ss, &ss->delay.commands[i]);
                 ss->delay.time[i] = 0;
                 ss->delay.count--;

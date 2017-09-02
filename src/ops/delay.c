@@ -23,6 +23,8 @@ static void mod_DEL_func(scene_state_t *ss, exec_state_t *NOTUSED(es),
 
     if (a < 1) a = 1;
 
+    // 0 is the magic number for an empty slot.
+    // Be careful not to set delay.time[i] to 0 before calling this function.
     while (ss->delay.time[i] != 0 && i != DELAY_SIZE) i++;
 
     if (i < DELAY_SIZE) {

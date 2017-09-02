@@ -69,6 +69,10 @@ build += ../src/scanner.c ../src/match_token.c ../module/gitversion.c
 MAKEFILE_PATH = ../libavr32/asf/avr32/utils/make/Makefile.avr32.in
 include $(MAKEFILE_PATH)
 
+# Add a rule to build op_enum.h
+../src/ops/op_enum.h: ../src/match_token.rl
+	../utils/op_enums.py
+
 # Add a rule to build match_token.c from match_token.rl
 ../src/match_token.c: ../src/match_token.rl
 	ragel -C -G2 ../src/match_token.rl -o ../src/match_token.c

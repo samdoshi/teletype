@@ -47,8 +47,12 @@ __pycache__/
 # Build outputs
 /src/match_token.c
 /src/scanner.c
+/src/ops/op_enum.h
 /simulator/tt
 /module/gitversion.c
 /tests/tests
 /docs/teletype.pdf
 /docs/teletype.html
+
+# Local makefile config
+/config.mk

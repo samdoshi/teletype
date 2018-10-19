@@ -27,6 +27,8 @@ make
 ./flash.sh
 ```
 
+[libavr32]: https://github.com/monome/libavr32
+
 ## Tests
 
 To run the tests:
@@ -51,6 +53,8 @@ Version 6.9 is known to work.
 
 See section 6.3 in the Ragel manual for information on the `=>` scanner constructor used.
 
+[ragel]: http://www.colm.net/open-source/ragel/
+
 ## Adding a new `OP` or `MOD` (a.k.a. `PRE`)
 
 If you want to add a new `OP` or `MOD`, please create the relevant `tele_op_t` or `tele_mod_t` in the `src/ops` directory. You will then need to reference it in the following places:
@@ -61,14 +65,29 @@ If you want to add a new `OP` or `MOD`, please create the relevant `tele_op_t` o
 
 There is a test that checks to see if the above have all been entered correctly. (See above to run tests.)
 
-## Code Formatting
+## Code Formatting / `clang-format`
 
 To format the code using `clang-format`, run `make format` in the project's root directory. This will _only_ format code that has not been commited, it will format _both_ staged and unstaged code.
 
 To format all the code in this repo, run `make format-all`.
 
-[libavr32]: https://github.com/monome/libavr32
-[ragel]: http://www.colm.net/open-source/ragel/
+The code base is currently formatted with the most recent version of `clang-format`, version 7.0 as of writing.
+
+To install:
+
+```bash
+brew install clang-format  # Homebrew (OSX)
+apt install clang-format   # Debian / Ubuntu / WSL (Windows 10), see note about versions below
+pacman -Sy clang           # Arch Linux
+```
+
+If your installation of `clang-format` is below 7.0 on Debian / Ubuntu / WSL, it _may_ be available in your package manager as _clang-format-7_. Otherwise you can use the [apt repos from LLVM](https://apt.llvm.org/) and then `apt install clang-format-7`. In either case you will need to update your `PATH` variable to use the newer `clang-format`:
+
+```bash
+export PATH="/usr/lib/llvm-7/bin:$PATH"
+```
+
+This will need to be done for each shell session.
 
 ## Documentation
 

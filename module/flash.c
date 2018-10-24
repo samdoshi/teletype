@@ -61,7 +61,7 @@ void flash_prepare() {
 
     cal_data_t cal = { 0, 16383, 0, 16383 };
     flashc_memcpy((void *)&f.cal, &cal, sizeof(cal), true);
-    device_config_t device_config = {.flip = 0 };
+    device_config_t device_config = { .flip = 0 };
     flashc_memcpy((void *)&f.device_config, &device_config,
                   sizeof(device_config), true);
     flash_update_last_saved_scene(0);

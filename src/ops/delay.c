@@ -79,10 +79,10 @@ static void mod_DEL_X_func(scene_state_t *ss, exec_state_t *es,
     if (delay_time < 1) delay_time = 1;
 
     // set first delay time to delay time
-    delay_time_next = delay_time;  
+    delay_time_next = delay_time;
 
-    while ( num_delays > 0 && delay_common_add(ss, es, delay_time_next, post_command) ) 
-    {
+    while (num_delays > 0 &&
+           delay_common_add(ss, es, delay_time_next, post_command)) {
         // increment delay time for next delay
         // normalise incremented value to stop negative wrap from increment
         delay_time_next += delay_time;
@@ -104,10 +104,10 @@ static void mod_DEL_R_func(scene_state_t *ss, exec_state_t *es,
     if (delay_time < 1) delay_time = 1;
 
     // set first delay time to 1ms to trigger immediately
-    delay_time_next = 1;  
+    delay_time_next = 1;
 
-    while ( num_delays > 0 && delay_common_add(ss, es, delay_time_next, post_command) )
-    {
+    while (num_delays > 0 &&
+           delay_common_add(ss, es, delay_time_next, post_command)) {
         // increment delay time for next delay
         // normalise incremented value to stop negative wrap from increment
         delay_time_next += delay_time;
